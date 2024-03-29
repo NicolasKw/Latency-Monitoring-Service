@@ -23,7 +23,7 @@ module.exports = function performanceMetricsCalculator(endpointData, customPerce
     let upCounter = 0;
     let delayedCounter = 0;
     let downCounter = 0;
-    const totalCounter = uptimeStates.length;
+    const totalReadings = uptimeStates.length;
 
     uptimeStates.forEach(elem => {
         if(elem === 'UP') upCounter++;
@@ -32,11 +32,12 @@ module.exports = function performanceMetricsCalculator(endpointData, customPerce
     })
 
     // Results delivered with 2 decimal places
-    upPercentage = parseFloat((upCounter / totalCounter * 100).toFixed(2));
-    delayedPercentage = parseFloat((delayedCounter / totalCounter * 100).toFixed(2));
-    downPercentage = parseFloat((downCounter / totalCounter * 100).toFixed(2));
+    upPercentage = parseFloat((upCounter / totalReadings * 100).toFixed(2));
+    delayedPercentage = parseFloat((delayedCounter / totalReadings * 100).toFixed(2));
+    downPercentage = parseFloat((downCounter / totalReadings * 100).toFixed(2));
 
     return {
+        totalReadings,
         upPercentage,
         delayedPercentage,
         downPercentage,
