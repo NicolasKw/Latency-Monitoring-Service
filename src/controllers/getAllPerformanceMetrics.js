@@ -5,6 +5,6 @@ module.exports = async function getAllPerformanceMetrics(req, res) {
         const performanceMetrics = await performanceMetricsHandler(req);
         res.status(200).json(performanceMetrics);
     } catch (error) {
-        res.status(500).json({ error: error.message })
+        res.status(404).json({ error: error.message })
     }
 };

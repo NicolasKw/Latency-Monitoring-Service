@@ -4,7 +4,7 @@ const { Monitoring } = require('../config/db');
 module.exports = async function dataFetcher(startDate, endDate) {   
     try {
         // Get the data from de DB filtered by the date range provided
-        return await Monitoring.findAll({
+        const data = await Monitoring.findAll({
             where: {
                 timestamp: {
                     [Op.gte]: startDate,
@@ -13,7 +13,15 @@ module.exports = async function dataFetcher(startDate, endDate) {
             },
         });
 
+        const firstReading = await Monitoring.findOne()
+        const firstReadingDate = firstReading.dataValues.timestamp;
+
+        return {
+            data,
+            firstReadingDate
+        };
+
     } catch (error) {
-        res.status(500).json({ error: error.message });  
+        throw new Error(error.message);  
     }
 };

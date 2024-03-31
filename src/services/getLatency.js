@@ -1,11 +1,11 @@
 const axios = require('axios');
 
 module.exports = async function getLatency(endpoint) {
-    const start = Date.now() - (3 * 60 * 60 * 1000);    // UTC-03:00
+    const start = Date.now()
     
     try {
         await axios.get(endpoint);
-        const end = Date.now() - (3 * 60 * 60 * 1000);  // UTC-03:00
+        const end = Date.now()
 
         const latency = end - start;
 

@@ -14,10 +14,10 @@ const endpoints = [
     // 'https://www.coindesk.com/',
 ];
 
-// Frequency with which monitoring requests will be made
+// Frequency with which monitoring requests will be made (in milliseconds)
 const readingsInterval = 2000;
 
-// Threshold at which the uptime status is considered DELAYED
+// Threshold at which the uptime status is considered DELAYED (in milliseconds)
 const delayedLatencyThreshold = 1000;
 
 module.exports = { endpoints, readingsInterval, delayedLatencyThreshold };

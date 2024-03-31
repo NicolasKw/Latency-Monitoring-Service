@@ -16,11 +16,12 @@ module.exports = async function performanceMetricsHandler(req, customPercentil) 
     
     try {
         // Fetch data
-        const dbData = await dataFetcher(startDate, endDate);
+        const { data, firstReadingDate } = await dataFetcher(startDate, endDate);
+        if(!data.length) throw new Error(`There are no readings available for this date range. First reading on ${firstReadingDate}`);
 
         // Get the performance metrics for each endpoint
         const performanceMetrics = endpoints.map(endpoint => {
-            const endpointData = dbData.filter(elem => elem.dataValues.endpoint === endpoint);
+            const endpointData = data.filter(elem => elem.dataValues.endpoint === endpoint);
             const metrics = performanceMetricsCalculator(endpointData, customPercentil);
             return { endpoint, ...metrics };
         });
