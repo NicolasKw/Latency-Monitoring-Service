@@ -1,10 +1,10 @@
-const performanceMetricsHandler = require('./performanceMetricsHandler');
+const performanceMetricsHandler = require('../handlers/performanceMetricsHandler');
 
 module.exports = async function getLatencyPercentils(req, res) {
     const { percentil } = req.params;
 
     try {
-        if(percentil[0] !== 'p') throw new Error(`${percentil} is not a valid percentil. Enter percentil as 'p...'`)
+        if(!percentil.match(/^p\d+$/)) throw new Error(`${percentil} is not a valid percentil. Enter percentil as 'p...'`)
 
         const performanceMetrics = await performanceMetricsHandler(req, percentil);
         const percentilResults = performanceMetrics.map(elem => {

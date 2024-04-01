@@ -15,8 +15,10 @@ module.exports = function performanceMetricsCalculator(endpointData, customPerce
     }
     // If user wants to get a custom percentil
     let customPercentilResult;
-    if(customPercentil && !defaultPercentils[customPercentil]) {
+    if(customPercentil && !defaultPercentils.hasOwnProperty(customPercentil)) {
         customPercentilResult = percentileCalculator(latencies, parseFloat(customPercentil.slice(1)));
+    } else {
+        customPercentilResult = defaultPercentils[customPercentil];
     }
 
     // Counters

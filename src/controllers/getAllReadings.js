@@ -4,8 +4,6 @@ const dataFetcher = require('../services/dataFetcher');
 module.exports = async function getAllReadings(req, res) {
     let readings;
 
-    console.log(req.query)
-
     try {
         // If the user wants to see the readings within a certain date range
         if(Object.keys(req.query).length) {

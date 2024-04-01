@@ -1,4 +1,4 @@
-const performanceMetricsHandler = require('./performanceMetricsHandler');
+const performanceMetricsHandler = require('../handlers/performanceMetricsHandler');
 
 module.exports = async function getAllPerformanceMetrics(req, res) {
     try {
