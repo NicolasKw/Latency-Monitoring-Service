@@ -1,7 +1,5 @@
 const { Router } = require('express');
-const getAllPerformanceMetrics = require('../controllers/getAllPerformanceMetrics');
-const getStatePercentages = require('../controllers/getStatePercentages');
-const getLatencyPercentils = require('../controllers/getLatencyPercentils');
+const { getAllPerformanceMetrics, getLatencyPercentils, getStatePercentages } = require('../controllers/performanceController');
 
 const router = Router();
 
@@ -182,10 +180,10 @@ router.get('/state/:state', getStatePercentages);
  *         name: percentil
  *         schema:
  *           type: string
- *           example: p80
+ *           example: 80
  *         required: true
  *         description: 
- *            Latency percentil X: pX
+ *            Latency percentil X (number between 0 and 100)
  *       - in: query
  *         name: startDate
  *         schema:
@@ -219,7 +217,7 @@ router.get('/state/:state', getStatePercentages);
  *           application/json:
  *             example:
  *               message:
- *                  q80 is not a valid percentil. Enter percentil as 'p...'
+ *                  q80 is not a valid percentil. Enter a number between 0 and 100
  */
 router.get('/percentil/:percentil', getLatencyPercentils);
 

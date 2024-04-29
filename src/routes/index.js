@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const getAllReadings = require('../controllers/getAllReadings');
-const performanceRouter = require('./performance');
+const getAllReadings = require('../controllers/readingsController');
+const performanceRouter = require('../routes/performance');
 
 const router = Router();
 

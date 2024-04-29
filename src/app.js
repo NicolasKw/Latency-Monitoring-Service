@@ -2,7 +2,7 @@ process.env.TZ = 'America/Argentina/Buenos_Aires';
 const express = require('express');
 const morgan = require('morgan');
 const getLatency = require('./services/getLatency');
-const saveReadingInDb = require('./services/saveReadingInDb');
+const saveReadingInDb = require('./repositories/saveReadingInDb');
 const { endpoints, readingsInterval } = require('./config/config');
 const routes = require('./routes/index');
 

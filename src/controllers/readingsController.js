@@ -1,5 +1,6 @@
 const { Monitoring } = require('../config/db');
-const dataFetcher = require('../services/dataFetcher');
+const dataFetcher = require('../repositories/dataFetcher');
+const validateDates = require('../services/validateDates');
 
 module.exports = async function getAllReadings(req, res) {
     let readings;
@@ -7,13 +8,12 @@ module.exports = async function getAllReadings(req, res) {
     try {
         // If the user wants to see the readings within a certain date range
         if(Object.keys(req.query).length) {
+            // Get dates from query
             const startDate = new Date(req.query.startDate);
             let endDate = new Date(req.query.endDate);
 
             // Dates validation
-            if(isNaN(startDate) || isNaN(endDate)) {
-                throw new Error('Invalid date format. Enter dates in YYYYY-MM-DD format');
-            };
+            validateDates(startDate, endDate);
 
             // startDate should begin at 00:00:00 and endDate finish at 23:59:59
             endDate.setUTCHours(23, 59, 59, 999);
